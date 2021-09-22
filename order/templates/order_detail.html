@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block pro %}
+    <div class="books" style="width: 60%; float: right;margin: 20px;    background-color: #fff0f0; direction: rtl;
+    padding-left: 40px;
+    margin-right: 20%;
+}">
+        <table class="table">
+        <tr>
+            <th scope="col">کد</th>
+            <th scope="col">موضوع</th>
+            <th scope="col">نویسنده</th>
+            <th scope="col">شرح</th>
+            <th scope="col">قیمت</th>
+        </tr>
+        {% for item in order_items %}
+            <tr>
+                <td> {{ item.book.id}}</td>
+                <td> {{ item.book.title}}</td>
+                <td>{{ item.book.author }}</td>
+                <td>{{ item.book.description }}</td>
+                <td>{{ item.book.price }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+</body>
+</html>

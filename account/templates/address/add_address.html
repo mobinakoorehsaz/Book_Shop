@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" style="    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+   background-color: #f3c3d8 ">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+
+    form {
+        border: 3px solid #f1f1f1;
+    }
+
+    label {
+        color: white;
+    }
+
+    input[type=email], input[type=text],input[type=number] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #9f0f4e;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+</style>
+<body>
+    <form class="category_form" method="post" style="    background-color: #640f35;
+    box-shadow: 0 10px 10px 0 rgba(19,1,1,0.8);
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-bottom: 50px;">
+        <p style="color:white; font-size: 20px; display: flex; justify-content: center;">آدرس</p>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div>
+            <button class="fa fa-plus icon" type="submit" value="Add Todo Item">
+                تایید
+            </button>
+            <button type="reset">
+                reset
+            </button>
+        </div>
+    </form>
+</body>
+</html>

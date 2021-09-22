@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block pro %}
+    <div class="books" style="width: 60%; float: right;margin: 20px;    background-color: #fff0f0; direction: rtl;
+    padding-left: 40px;
+    margin-right: 20%;
+}">
+        <table class="table">
+            <tr>
+                <th scope="col">کاربر</th>
+                <th scope="col">وضعیت</th>
+                <th scope="col">کشور</th>
+                <th scope="col">شهر</th>
+                <th scope="col">کد پستی</th>
+                <th scope="col">تلفن</th>
+                <th scope="col">تاریخ</th>
+
+            </tr>
+            {% for item in orders %}
+                <tr>
+                    <td><a href="{% url 'order:order_detail' item.id%}">{{ item.user.email }}</a></td>
+                    {% if item.status == False %}
+                        <td>پرداخت نشده</td>
+                    {% else %}
+                        <td>پرداخت شد</td>
+                    {% endif %}
+                    <td>{{ item.country }}</td>
+                    <td>{{ item.city }}</td>
+                    <td>{{ item.postal_code }}</td>
+                    <td>{{ item.phone }}</td>
+                    <td>{{ item.create }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+{% include 'message.html' %}
+<html lang="en" style="    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+   background-color: #9ca9ff ">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+
+    label {
+        color: white;
+    }
+
+    input[type=email], input[type=text] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #fc0070;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+
+</style>
+
+<body>
+<form method="post" style="    background-color: #07104b;
+    box-shadow: 0 10px 10px 0 rgba(19,1,1,0.8);
+    height: 500px;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 50px;
+    padding-bottom: 50px;">
+<p style="color: white; font-size: 20px;    display: flex;
+    justify-content: center;">ورود</p>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button href="{% url 'products:index' %}" type="submit">ورود به حساب کاربری</button>
+    <a style="    color: white;
+    display: flex;
+    flex-direction: row-reverse;
+    font-size: 20px;
+    padding-top: 20px;
+    text-decoration: none;" href="{% url 'account:reset_password' %}">آیا رمز عبور خود را فراموش کرده اید؟</a>
+    <br>
+        <button type="button"><a style="text-decoration: none; color: white;" href="{% url 'account:user_register' %}">ثبت نام</a></button>
+
+</form>
+
+</body>
+
+</html>

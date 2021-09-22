@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" style="    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+   background-color: #cacdd9 ">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    label {
+    }
+
+    input[type=email], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #07b4d2;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+
+</style>
+
+<body>
+<form method="post" style="    background-color: #1ce8ef;
+    box-shadow: 0 10px 10px 0 rgba(19,1,1,0.8);
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+direction: rtl;">
+    {%  if validlink %}
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">تغییر رمز عبور</button>
+</form>
+    {% endif %}
+
+</body>
+</html>

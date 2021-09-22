@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" style="    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+   background-color: #cd8bec ">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    label {
+        color: white;
+    }
+
+    input[type=email], input[type=text],input[type=number] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #fc0070;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+
+</style>
+{% include 'message.html' %}
+
+<body>
+<div class="container">
+    <form method="post" style="    background-color: #5a0a72;
+    box-shadow: 0 10px 10px 0 rgba(19,1,1,0.8);
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 50px;
+    padding-bottom: 50px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">پرداخت</button>
+        <button type="reset"><a style="text-decoration: none; color: white;" href="{% url 'order:cart_detail' %}">انصراف</a></button>
+    </form>
+</div>
+</body>
+</html>

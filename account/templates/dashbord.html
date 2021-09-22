@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'base.html' %}
+    {% load static %}
+    <meta charset="UTF-8">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Title</title>
+</head>
+<body>
+{% block script %}
+    <div style="   display:flex;justify-content: space-around;">
+    <div style="font-size: 40px;
+    font-family: 'IranNastaliq';display: flex;  width: 300px;  border: 5px solid #02947b;margin: 5px;background-color: #00eccf;
+    padding: 30px;justify-content: space-around;" class="admin">
+        <img style="width: 40%;
+    height: 80px;" src="{% static 'icons8-user-shield-50.png' %}">
+             <p>کارمند</p>
+        <p> {{ admin }}</p>    </div >
+        <div style="font-size: 40px;
+    font-family: 'IranNastaliq';display: flex;  width: 300px;  border: 5px solid #b70354;margin: 5px;background-color: #fc0070;
+    padding: 30px;justify-content: space-around;" class="customer">
+            <img style="width: 40%;
+    height: 80px;" src="{% static 'icons8-people-64.png' %}">
+             <p>کاربر</p>
+        <p> {{ customer }}</p>
+
+
+    </div>
+            <div style="font-size: 40px;
+    font-family: 'IranNastaliq';display: flex;  width: 300px;  border: 5px solid #39a405;margin: 5px;background-color: #4be001;
+    padding: 30px;justify-content: space-around;"class="orders">
+                <img style="width: 40%;
+    height: 80px;" src="{% static 'icons8-mobile-order-80.png' %}">
+             <p>سفارش</p>
+        <p> {{ orders }}</p>    </div>
+                <div style="font-size: 40px;
+    font-family: 'IranNastaliq';display: flex;  width: 300px;  border: 5px solid #deb800;margin: 5px;background-color: #fdd302;
+    padding: 30px;justify-content: space-around;" class="orders">
+
+
+                </div>
+    </div>
+    <div class="row" style="width: 700px; height: 400px; margin-left: 30%">
+<canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for item in book %}'{{ item.title }}',{% endfor %}],
+        datasets: [{
+            label: 'محبوبیت',
+            data: [{% for item in book %}{{ item.total_like }},{% endfor %}],
+            backgroundColor: [
+                'rgba(250,71,108,0.7)',
+                'rgba(38,230,255,0.69)',
+                'rgba(255,182,4,0.79)',
+                'rgba(38,252,70,0.82)',
+                'rgba(164,11,169,0.83)',
+                'rgba(255,106,0,0.8)'
+            ],
+            borderColor: [
+                'rgb(255,27,75)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+{% endblock %}
+
+</body>
+</html>

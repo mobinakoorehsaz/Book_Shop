@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pro %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <style>
+        .fa {
+            font-size: 50px;
+            cursor: pointer;
+            user-select: none;
+            color: red;
+        }
+
+        .fa:hover {
+            color: darkblue;
+        }
+    </style>
+    <body>
+    <hr>
+    <div class="task-detail" style=" box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);    width: 70%;
+    margin-left: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #ffede0;">
+        <div style="    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;">
+            <img alt="#" style="width: 300px;" src="{% static 'book.png' %}">
+            {#            <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>#}
+            <a style="    text-decoration: none;
+    font-size: 40px;
+    font-family: cursive;
+    color: black;
+    text-decoration-line: underline; " href="{% url 'products:like' book.id %}"><img style="
+    width: 100px;"
+                                                                                     src="{% static 'icons8-heart-58.png' %}">{{ book.total_like }}
+            </a>
+        </div>
+        <div style="direction: rtl;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+font-family: 'IranNastaliq';
+    font-size: 30px;
+    font-weight: bold;">
+            <P>موضوع : {{ book.title }}</P>
+            <br>
+            <P>نویسنده : {{ book.author }}</P>
+            <br>
+            <P>شرح : {{ book.description }}</P>
+            <br>
+            <P>قیمت : {{ book.total_price }} تومان</P>
+            <form method="post" action="{% url 'order:add_card' book.id %}">
+                {% csrf_token %}
+                تعداد :
+                <input type="number" name="quantity" min="1" max="{{ book.qty }}" value="1"
+                       required oninvalid="setCustomValidity('باید حداکثر تعداد {{ book.qty }} باشد')">
+                <br>
+                <br>
+                {% if book.qty <= 0 %}
+                    <p style="    font-size: 40px;
+    color: #b60505;"> ناموجود</p>
+                {% else %}
+                    <button style="    border: none;
+    color: whitesmoke;
+    background-color: #da4343;
+    font-family: 'IranNastaliq';
+    padding: 10px;
+    margin-bottom: 9px;
+    margin-top: -7px;
+    border-radius: 20%;" type="submit">افزودن به سبد خرید
+                    </button>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    <script>
+        function myFunction(x) {
+            x.classList.toggle("fa-thumbs-down");
+        }
+    </script>
+    </body>
+    </html>
+{% endblock %}

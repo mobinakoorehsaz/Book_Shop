@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="index.css"/>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+
+    <link
+            href="http://www.fontonline.ir/css/IranNastaliq.css"
+            rel="stylesheet"
+            type="text/css"
+    />
+    <link
+            rel="stylesheet"
+            href="path/to/font-awesome/css/font-awesome.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Fuggles&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="base.css"/>
+
+    <title>Document</title>
+</head>
+{% block pro %}
+    <body>
+    {% if items < 1 %}
+        <div style=" box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);    width: 70%;
+    margin-left: 15%;
+    padding: 20px;
+        display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    background-color: #ffede0;">
+            <img style="    padding-right: 35%;" src="{% static 'empty-basket.png' %}">
+        </div>
+        {% endif %}
+        {% for c in cart %}
+    <div style=" box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);    width: 70%;
+    margin-left: 15%;
+    padding: 20px;
+        display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    background-color: #ffede0;">
+
+            <div style="display: flex;
+    flex-direction: row-reverse;">
+                <div><img style="width: 200px;" src="{% static 'book.png' %}" alt="book"/>
+                </div>
+                <div style="display: flex;
+                    font-family: 'IranNastaliq';
+    font-size: x-large;
+    flex-direction: column;
+    align-items: flex-end;">
+                    <h1>{{ c.product.title }}</h1>
+                    <p>نویسنده:{{ c.product.author }}</p>
+                    <p>تعداد : {{ c.quantity }}</p>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <button style="border: none;
+    background-color: #ffede0;" type="submit"><a style="       text-decoration: none; font-size: 20px;
+    font-family: cursive;
+    padding-left: 10px;" class="text-danger " href="{% url 'order:remove_card' c.id %}">X</a></button>
+                </div>
+                <br>
+                <br>
+                <div>
+                    <p style="    font-family: fantasy;
+    font-size: 50px;"> {% widthratio c.product.total_price 1 c.quantity %}</p>
+                </div>
+            </div>
+            </div>
+    </div>
+    <br/>
+            {% endfor %}
+
+    <hr/>
+    <div style="display: flex;
+    align-items: baseline;
+    flex-direction: row-reverse;
+    justify-content: space-around;">
+        <div style="padding: 40px;
+         box-shadow: 0 10px 10px 0 rgba(19,1,1,0.8);
+             font-family: 'IranNastaliq';
+    font-size: 20px;
+    border-radius: 10%;    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+width: 300px;
+align-items: center;
+">
+            جمع کل
+            <p style="font-family: fantasy;
+    font-size: 40px;">{{ total }}</p>
+            <button style="    border: none;
+    background: #0eb27b;
+    padding: 10px;
+    border-radius: 20%;
+    padding-inline: 20px;"><a style="text-decoration: none; color: white;" href="{% url 'order:order_create' %}">ثبت
+                سفارش</a></button>
+
+        </div>
+        <div>
+            <form method="post" style="    background-color: #fa6902;
+    box-shadow: 0 10px 10px 0 rgba(19,1,1,0.8);
+        padding: 40px;
+    border-radius: 10%;
+    font-family: 'IranNastaliq';
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+font-size: 20px;">
+                <p>کد تخفیف</p>
+                {% csrf_token %}
+                {{ coupon_form.as_p }}
+                <button style="    border: none;
+    background-color: #912205;
+    color: white;
+    padding: 10px;
+    border-radius: 15%;
+    padding-inline: 40px;" type="submit">اعمال
+                </button>
+            </form>
+        </div>
+    </div>
+
+    </body>
+    </html>
+{% endblock %}

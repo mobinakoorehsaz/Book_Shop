@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+<html lang="en">
+<head>{% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+{% block pro %}
+    <body>
+    <div class="container">
+        <div class=" products row">
+            {% if count == 0 %}
+               <img style="margin-left: 350px" src="{% static 'sad_cat.gif' %}">
+            {% else %}
+                {% for book in books %}
+                    <div class="col-3 card">
+                        <img src="{% static 'book.png' %}" alt="Denim Jeans" style="width:100%">
+                        <h1>{{ book.title }}</h1>
+                        {% if book.price == book.total_price %}
+                            <p class="price">{{ book.price }}</p>
+                        {% else %}
+                            <p>
+                                <a style="font-family: auto; text-decoration-line: line-through; text-decoration-color: red;"
+                                   class="price">{{ book.price }}</a>
+                                <a class="price">{{ book.total_price }}</a></p>
+
+                        {% endif %}
+                        <p> نوسنده:{{ book.author }}</p>
+
+                        {% if book.qty <= 0 %}
+                            <p style="    font-size: 40px;
+    color: #b60505;">ناموجود</p>
+                        {% else %}
+                            <p>
+                                <button style="border: none;
+    background-color: #b20554;
+    padding: 10px;
+    border-radius: 20%;"><a style="color:#ffffff;font-size: 20px; text-decoration: none;"
+                            href="{{ book.get_absolute_url }}">مشاهده
+                                    کتاب</a></button>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+    </body>
+{% endblock %}
+</html>

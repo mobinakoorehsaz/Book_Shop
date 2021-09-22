@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block pro %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+    <br>
+    <div class="profile" style="display: flex; flex-direction: inherit;">
+        <div class="address" style="width: 50%; margin-left: 10%;     background-color: #dedfe0;
+    text-align: center;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">نشانی</th>
+                    <th scope="col">کشور</th>
+                    <th scope="col">شهر</th>
+                    <th scope="col">کد پستی</th>
+                    <th scope="col">تلفن</th>
+                    <th scope="col">حذف</th>
+                </tr>
+                </thead>
+                <tbody style="">
+                {% for pr in profile %}
+                    <tr>
+                        <td>{{ pr.txt }}</td>
+                        <td>{{ pr.country }}</td>
+                        <td>{{ pr.city }}</td>
+                        <td>{{ pr.postal_code }}</td>
+                        <td>{{ pr.phone }}</td>
+                        <td><a style="    font-size: 20px;    text-decoration: none;
+    font-family: cursive;
+    padding-left: 10px;" class="text-danger " href="{% url 'account:delete_address' pr.id %}">X</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div style=" box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);background-color: #d2d3d8;
+    padding-right: 40px;
+    margin-right: -100px;
+    font-size: 20px;
+    padding-left: 40px;
+    height: 400px;
+    font-family: -webkit-body;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+margin-left: 100px;">
+            <table class="table" style="direction: rtl;
+    text-align: -webkit-left;">
+                <tr>
+                    <th scope="col">نام کاربری:</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th scope="col">ایمیل:</th>
+                    <td> {{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th scope="col">اسم:</th>
+                    <td>{{ user.full_name }}</td>
+                </tr>
+                <tr>
+                    <th scope="col">
+                        <button style="margin-top: 50px;
+    border: none;
+    text-decoration: none;"><a style="color: black" href="{% url 'account:user_profile_update' %}">ویرایش</a></button>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="button" style="    display: flex;
+    justify-content: space-around;">
+        <button style="
+            font-family: 'IranNastaliq';
+    padding: 15px;
+    font-size: 20px;
+    border: none;
+    margin-top: 20px;
+        border-radius: 20%;
+
+    background-color: black;"><a style="color: white; text-decoration: none;" href="{% url 'account:add_address' %}">اضافه
+            کردن آدرس</a>
+        </button>
+        <button style="
+            font-family: 'IranNastaliq';
+    padding: 15px;
+    font-size: 20px;
+        border: none;
+    margin-top: 20px;
+    border-radius: 20%;
+    background-color: black;"><a style="color: white; text-decoration: none;" href="{% url 'account:history' %}">تاریخچه
+            سفارشات</a>
+        </button>
+    </div>
+
+    </body>
+    </html>
+{% endblock %}

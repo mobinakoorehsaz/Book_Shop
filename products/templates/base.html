@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>base</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+            href="https://www.fontonline.ir/css/IranNastaliq.css"
+            rel="stylesheet"
+            type="text/css"
+    />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Fuggles&display=swap"
+            rel="stylesheet"
+
+    />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<style>
+
+    .searchbox{
+        padding-bottom: 10px;
+    }
+ .searchbox input{
+         width: 400px;
+    height: 40px;
+    border-radius: 20px;
+
+ }
+ .searchbox button{
+     border: none;
+    background-color: #0b2873;
+    color: white;
+ }
+.searchbox button>img{
+    width: 30px;
+}
+</style>
+<body>
+
+{#---------------------------------------------------------------------------------------------------#}
+<div class="sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top"
+         style="direction: rtl; background-color: #0b2873;height: 100px;padding-top: 20px;">
+
+        {% if user.is_authenticated %}
+
+            {% if user.is_superuser %}
+                <div class="nav-logo " style="width: 30%;display: flex;"><p><a href="{% url "products:index" %}"><img
+                        style="width: 100px" src="{% static 'pngfind.com-superman-symbol-png-625339.png' %}"
+                        alt="rose"/></a><a
+                        style="color:white; text-decoration: none;" href="{% url 'admin:index' %}">superuser</a></p>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {% block search %}
+                <form class="searchbox" method="post" action="{% url 'products:product_search' %}">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit"><img src="{% static '106236_search_icon.png' %}"></button>
+                </form>
+                {% endblock %}
+                <ul class="navbar-nav mr-auto" style="margin-left: 30px">
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 20px;font-weight: bold;"
+                       class="nav-link"
+                       href="{% url 'products:adding_ctg' %}">دسته بندی+</a><br>
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 20px;font-weight: bold;"
+                       class="nav-link"
+                       href="{% url 'account:dashboard' %}">نمودار</a><br>
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 20px;font-weight: bold;"
+                       class="nav-link" href="{% url 'products:adding_book' %}">کتاب+</a>
+                    <li class="nav-item active"><img src="{% static 'accounticon.png' %}" alt="icon"></li>
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 20px;font-weight: bold;"
+                       class="nav-link"
+                       href="{% url 'account:user_profile' %}">{{ user.username }}</a><br>
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 30px;font-weight: bold;"
+                       class="nav-link" href="{% url 'account:user_logout' %}">خروج</a>
+
+                </ul>
+            {% elif user.is_admin %}
+                <div class="nav-logo " style="width: 30%;display: flex;"><p><a href="{% url "products:index" %}"><img
+                        style="width: 100px" src="{% static 'admin-settings-male.png' %}" alt="rose"/></a><a
+                        style="color:white; text-decoration: none;" href="{% url 'account:staff_panel' %}">admin
+                    pannel</a></p></div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="searchbox" method="post" action="{% url 'products:product_search' %}">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit"><img src="{% static '106236_search_icon.png' %}"></button>
+                </form>
+                <ul class="navbar-nav mr-auto" style="margin-left: 30px">
+                <li class="nav-item active"><img src="{% static 'accounticon.png' %}" alt="icon"></li>
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 20px;font-weight: bold;"
+                       class="nav-link"
+                       >{{ user.username }}</a><br>
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 20px;font-weight: bold;"
+                       class="nav-link"
+                       href="{% url 'products:adding_ctg' %}">دسته بندی+</a><br>
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 20px;font-weight: bold;"
+                       class="nav-link"
+                       href="{% url 'order:order_items' %}">سفارشات</a>
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 20px;font-weight: bold;"
+                       class="nav-link" href="{% url 'products:adding_book' %}">کتاب+</a>
+
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 30px;font-weight: bold;"
+                       class="nav-link" href="{% url 'account:user_logout' %}">خروج</a>
+
+                </ul>
+
+
+            {% else %}
+                <div class="nav-logo " style="width: 30%;display: flex;"><p><a href="{% url "products:index" %}"><img
+                        style="width: 100px" src="{% static 'bookstorelogo.png' %}" alt="rose"/></a><a
+                        style="color:white; text-decoration: none;" href="#">کتابخانه</a></p></div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="searchbox" method="post" action="{% url 'products:product_search' %}">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit"><img src="{% static '106236_search_icon.png' %}"></button>
+                </form>
+                <ul class="navbar-nav mr-auto" style="margin-left: 30px">
+                    <li class="nav-item active"><img src="{% static 'accounticon.png' %}" alt="icon"></li>
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 20px;font-weight: bold;"
+                       class="nav-link"
+                       href="{% url 'account:user_profile' %}">{{ user.username }}</a><br>
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 30px;font-weight: bold;"
+                       class="nav-link" href="{% url 'account:user_logout' %}">خروج</a>
+                    <li style="margin-top: -10px;" class="nav-item active"><img
+                            src="{% static 'shoppingbasketicon.png' %}" alt="icon"></li>
+                    <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 30px;font-weight: bold;"
+                       class="nav-link"
+                       href="{% url 'order:cart_detail' %}">سبد خرید</a>
+                </ul>
+            {% endif %}
+
+        {% else %}
+            <div class="nav-logo " style="width: 30%;display: flex;"><p><a href="{% url "products:index" %}"><img
+                    style="width: 100px" src="{% static 'bookstorelogo.png' %}" alt="rose"/></a><a
+                    style="color:white; text-decoration: none;" href="#">کتابخانه</a></p></div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="searchbox" method="post" action="{% url 'products:product_search' %}">
+                {% csrf_token %}
+                {{ form }}
+                <button type="submit"><img src="{% static '106236_search_icon.png' %}"></button>
+                </form>
+            <ul class="navbar-nav mr-auto" style="margin-left: 30px">
+                <li class="nav-item active"><img src="{% static 'accounticon.png' %}" alt="icon"></li>
+                <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 30px;font-weight: bold;"
+                   class="nav-link" href="{% url 'account:user_login' %}">ورود</a>
+                <a style="text-decoration: none; color: white;font-family: 'IranNastaliq';font-size: 25px;font-weight: bold;"
+                   class="nav-link" href="{% url 'account:user_register' %}">ثبت نام</a>
+                <li style="margin-top: -10px;" class="nav-item active"><img src="{% static 'shoppingbasketicon.png' %}"
+                                                                            alt="icon"></li>
+                <a style="text-decoration: none;color: white;font-family: 'IranNastaliq';font-size: 25px;font-weight: bold;"
+                   class="nav-link" href="{% url 'order:cart_detail' %}">سبد خرید</a>
+            </ul>
+        {% endif %}
+
+        </div>
+    </nav>
+    <div class="categories ">
+        <ul style="display: flex; justify-content: space-around;">
+            <li><a href="{% url 'products:index' %}">همه</a></li>
+            {% for category in categories %}
+                <li><a href="{% url 'products:categoryTasks' category.id %}">{{ category }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% include 'message.html' %}
+{% block staff %}
+{% endblock %}
+{% block pro %}
+{% endblock %}
+{% block script %}
+{% endblock %}
+</body>
+</html>
+
+{#داکر#}
+{#رست فول#}
+{#جنگو#}
+{#متدولوژی های توسعه نرم افزار مثل اسکرام و اجایل#}
+{#devops#}
+{#ci/cd#}
+{#kubernetes#}
+{#سلری#}
+{#تست نویسی#}
+{#elastic and kibana#}
+{#front#}
+{#پروژه جدید با رست برای رزومه#}

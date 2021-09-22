@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block staff %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<hr>
+<div class="main" style="display: flex; justify-content: space-around;">
+  <div class="books" style="width: 60%; float: right;margin: 20px;    background-color: aliceblue; direction: rtl;
+    padding-left: 40px;">
+    <table class="table">
+        <tr>
+            <th scope="col">موضوع</th>
+            <th scope="col">نویسنده</th>
+            <th scope="col">شرح</th>
+            <th scope="col">قیمت</th>
+            <th scope="col">تخفیف درصدی</th>
+            <th scope="col">تخفیف نقدی</th>
+            <th scope="col">قیمت نهایی</th>
+            <th scope="col">لایک</th>
+            <th scope="col">حذف</th>
+        </tr>
+        {% for book in books %}
+            <tr>
+                <td> {{ book.title}}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.price }}</td>
+                <td>{{ book.discount }}</td>
+                <td>{{ book.cash_discount }}</td>
+                <td>{{ book.total_price }}</td>
+                <td>{{ book.total_like }}</td>
+                <td><a style="    font-size: 20px;
+    font-family: cursive;
+    padding-left: 10px;" class="text-danger " href="{% url 'account:delete_book' book.id %}">X</a></td>
+
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="ctg" style="width: 200px; float: left;margin: 20px;    background-color: aliceblue; direction: rtl;">
+   <table class="table" style="">
+            <tr>
+            <th scope="col">name</th>
+            <th scope="col">حذف</th>
+
+        </tr>
+            {% for ctg in categories %}
+            <tr>
+                <td> {{ ctg.name}}</td>
+                <td><a style="    font-size: 20px;
+    font-family: cursive;
+    padding-left: 10px;" class="text-danger " href="{% url 'account:delete_ctg' ctg.id %}">X</a></td>
+
+            </tr>
+        {% endfor %}
+
+</table>
+</div>
+</div>
+
+</body>
+</html>
+{% endblock %}

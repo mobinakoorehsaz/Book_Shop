@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for item in data %}
+    <h1>{{ item.book.title }}</h1>
+    <h1>{{ item.price }}</h1>
+    {% if i.order.status == True %}
+        <p>پرداخت شد</p>
+    {% else %}
+        <p>پرداخت نشد</p>
+    {% endif %}
+    <hr>
+{% endfor %}
+</body>
+</html>

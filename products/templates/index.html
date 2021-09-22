@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>products</title>
+</head>
+<body>{% block searchbar %}
+    <div class="search container" style="    display: flex;
+    justify-content: center;
+    width: 40%;
+    padding-top: 30px;">
+        <form method="post" action="{% url 'products:product_search' %}">
+            {% csrf_token %}
+            {{ form }}
+            <button style="
+                 background-color: #ffffff;
+        color: rgba(19,1,1,0.8);
+        border: none;
+        cursor: pointer;
+        " type="submit">جستجو
+            </button>
+        </form>
+        <div class="SearchResult"></div>
+    </div>
+{% endblock %}
+{% block pro %}
+    <p style="    font-family: 'IranNastaliq';
+    font-size: 30px;
+    display: flex;
+    flex-direction: row-reverse;
+    padding-right: 20px;">کتاب های پرطرفدار</p>
+
+    <div style=" display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    font-size: 20px;
+    font-family: 'IranNastaliq';
+    background-color: #feeaea;
+    border-top: 2px solid #962929;
+    border-bottom: 2px solid #721c24;
+    justify-content: center;
+    ">
+        {% for book in books %}
+            {% if book.total_like >= 1 %}
+                <div style="     border-left: 2px solid #c9739c;
+    padding-inline: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+">
+                    <img src="{% static 'book.png' %}" alt="Denim Jeans" style="width: 100px;">
+                    <a href="{{ book.get_absolute_url }}"
+                       style="font-size: 30px; text-decoration: none; color: black">{{ book.title }}</a>
+                    {% if book.price == book.total_price %}
+                        <p>{{ book.price }}</p>
+                    {% else %}
+                        <p>
+                            <a style="font-family: auto; text-decoration-line: line-through; text-decoration-color: red;"
+                            >{{ book.price }}</a>
+                            <a>{{ book.total_price }}</a></p>
+
+                    {% endif %}
+                    <p> نوسنده:{{ book.author }}</p>
+                </div>
+            {% endif %}
+
+        {% endfor %}
+    </div>
+    <hr>
+    <p style="    font-family: 'IranNastaliq';
+    font-size: 30px;
+    display: flex;
+    flex-direction: row-reverse;
+    padding-right: 20px;">همه ی کتاب ها</p>
+    <div class="container">
+        <div class=" products row">
+
+            {% for book in books %}
+                <div class="col-3 card">
+                    <img src="{% static 'book.png' %}" alt="Denim Jeans" style="width:100%">
+                    <h1>{{ book.title }}</h1>
+                    {% if book.price == book.total_price %}
+                        <p class="price">{{ book.price }}</p>
+                    {% else %}
+                        <p><a style="font-family: auto; text-decoration-line: line-through; text-decoration-color: red;"
+                              class="price">{{ book.price }}</a>
+                            <a class="price">{{ book.total_price }}</a></p>
+
+                    {% endif %}
+                    <p> نوسنده:{{ book.author }}</p>
+
+                    {% if book.qty <= 0 %}
+                        <p style="    font-size: 40px;
+    color: #b60505;">ناموجود</p>
+                    {% else %}
+                        <p>
+                            <button style="border: none;
+    background-color: #b20554;
+    padding: 10px;
+    border-radius: 20%;"><a style="color:#ffffff;font-size: 20px; text-decoration: none;" href="{{ book.get_absolute_url }}">مشاهده
+                                کتاب</a></button>
+                        </p>
+
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </body>
+    </html>
+{% endblock %}

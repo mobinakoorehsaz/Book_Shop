@@ -1,0 +1,167 @@
+/* navbar  */
+
+#navbar {
+  direction: rtl;
+  padding-right: 40px;
+  background-color: #0018a7;
+  display: flex;
+}
+
+.nav-ul {
+  padding-left: 50px;
+  padding-top: 5px;
+}
+
+/* navbar ul  */
+
+#navbar .nav-ul li {
+  display: flex;
+  padding-right: 10px;
+  padding-top: 2px;
+}
+#navbar .nav-ul li > a {
+  padding: 8px;
+  border-radius: 20%;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.nav-ul li {
+  font-size: 22px;
+  font-family: IranNastaliq, "IranNastaliq", tahoma;
+  font-weight: bold;
+}
+.nav-ul li > a {
+  color: rgb(253, 253, 253);
+  text-decoration: none;
+}
+.nav .nav-ul li > img {
+  display: flex;
+  align-items: baseline;
+}
+.nav-ul li > a:hover {
+  color: black;
+  background-color: white;
+}
+
+/* navbar logo  */
+
+.nav-logo p {
+  font-family: IranNastaliq, "IranNastaliq", tahoma;
+  font-weight: bold;
+  font-size: 40px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  padding-left: 20px;
+}
+.nav-logo a:hover {
+  text-decoration: none;
+}
+
+.nav-logo img {
+  height: 100px;
+}
+
+.products {
+  padding-top: 20px;
+}
+.col-3 {
+  height: 500px;
+  background-color: rgb(255, 197, 180);
+}
+.card {
+  align-items: center;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: auto;
+  font-family: IranNastaliq, "IranNastaliq", tahoma;
+  font-weight: bold;
+}
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.categories ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  padding: 10px;
+  background-color: antiquewhite;
+  position: sticky;
+  position: -webkit-sticky;
+}
+.categories ul > li {
+  padding-left: 10px;
+}
+.categories li > a {
+  text-decoration: none;
+  font-size: 20px;
+  font-family: IranNastaliq, "IranNastaliq", tahoma;
+  font-weight: bold;
+  color: #000;
+}
+/*.shopping-basket {*/
+/*  padding-top: 20px;*/
+/*}*/
+/*.col-12 {*/
+/*  height: 200px;*/
+/*  background-color: rgb(255, 197, 180);*/
+/*  display: flex;*/
+/*  flex-direction: row-reverse;*/
+/*}*/
+/*.col-12 img {*/
+/*  height: 200px;*/
+/*}*/
+.book-detail {
+  padding-top: 30px;
+  text-align: right;
+}
+.left-details button {
+background-color: rgb(167, 11, 11);
+}
+.left-details p {
+  background-color: white;
+  border-radius: 5%;
+  font-size: 30px;
+  padding: 10px;
+  height: 50px;
+  padding-right: 130px;
+}
+.namari {
+  width: 570px;
+}
+.last{
+  margin-left: 300px;
+}
+
+.last p{
+
+  font-family: IranNastaliq, "IranNastaliq", tahoma;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  background-color: rgb(22, 141, 52);
+  border-radius: 5%;
+  padding: 10px;
+  height: 50px;
+  width: 200px;
+
+}
+.last p>a{
+  text-decoration: none;
+  color: white;
+}
+.last button{
+  font-family: IranNastaliq, "IranNastaliq", tahoma;
+  font-weight: bold;
+
+  background-color: rgb(143, 12, 12);
+  color: white;
+  border-radius: 5%;
+  padding: 10px;
+  height: 50px;
+
+}
